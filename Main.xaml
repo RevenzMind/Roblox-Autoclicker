@@ -1,0 +1,343 @@
+﻿<Window
+    x:Class="Autoclicker.Main"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    x:Name="Window"
+    Title="Roblox AC"
+    Width="428"
+    Height="321"
+    AllowsTransparency="True"
+    Background="{x:Null}"
+    ResizeMode="NoResize"
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    mc:Ignorable="d">
+    <Window.Resources>
+
+        <Storyboard x:Key="UnFocus">
+            <DoubleAnimation
+                Storyboard.TargetName="Window"
+                Storyboard.TargetProperty="Opacity"
+                To="0.5"
+                Duration="0:0:0.1" />
+        </Storyboard>
+        <Storyboard x:Key="OnFocus">
+            <DoubleAnimation
+                Storyboard.TargetName="Window"
+                Storyboard.TargetProperty="Opacity"
+                To="1"
+                Duration="0:0:0.1" />
+        </Storyboard>
+
+
+
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="#FFB1B1B1" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border
+                            Background="#262626"
+                            BorderBrush="#2c2c2c"
+                            BorderThickness="1"
+                            CornerRadius="5">
+                            <ScrollViewer
+                                x:Name="PART_ContentHost"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#c7c7c7" />
+                            </Trigger>
+                            <Trigger Property="IsFocused" Value="True">
+                                <Setter Property="Background" Value="#c7c7c7" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="#c7c7c7" />
+            <Setter Property="MaxLength" Value="1" />
+        </Style>
+        <Style x:Key="FocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle
+                            Margin="2"
+                            SnapsToDevicePixels="true"
+                            Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                            StrokeDashArray="1 2"
+                            StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ControlboxButtons" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}" />
+            <Setter Property="Foreground" Value="#FFB1B1B1" />
+            <Setter Property="FontFamily" Value="/Fonts/#Segoe Fluent Icons" />
+            <Setter Property="FontSize" Value="9.5" />
+            <Setter Property="HorizontalAlignment" Value="Right" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border
+                            x:Name="border"
+                            Background="Transparent"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter
+                                x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="true">
+
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="#ffffff" />
+                            </Trigger>
+
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter TargetName="contentPresenter" Property="TextElement.Foreground" Value="#727272" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="FocusVisual1">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
+                        <Rectangle
+                            Margin="2"
+                            SnapsToDevicePixels="true"
+                            Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"
+                            StrokeDashArray="1 2"
+                            StrokeThickness="1" />
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="W11Button" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual1}" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="#02FFFFFF" />
+            <Setter Property="FontSize" Value="13" />
+            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="HorizontalContentAlignment" Value="Center" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="Padding" Value="50,8" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border
+                            x:Name="border"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5"
+                            SnapsToDevicePixels="true">
+                            <ContentPresenter
+                                x:Name="contentPresenter"
+                                Margin="{TemplateBinding Padding}"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                Focusable="False"
+                                RecognizesAccessKey="True"
+                                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver" Value="true">
+
+                                <Setter TargetName="border" Property="Background" Value="#5abce8" />
+                                <Setter TargetName="border" Property="BorderBrush" Value="#484848" />
+                            </Trigger>
+
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Border
+            Background="#202020"
+            BorderBrush="#3b3b3b"
+            BorderThickness="1.5"
+            CornerRadius="5">
+            <Grid>
+                <Grid
+                    x:Name="Controlbox"
+                    Height="40"
+                    VerticalAlignment="Top"
+                    Background="Transparent"
+                    MouseDown="MoveApp">
+                    <Label
+                        Margin="10,0,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalContentAlignment="Center"
+                        Foreground="#FFD2D2D2">
+                        Roblox AC
+                    </Label>
+                    <Button
+                        Width="45"
+                        Margin="0,0,0,0"
+                        Click="CloseApp"
+                        Content=""
+                        Style="{DynamicResource ControlboxButtons}" />
+                    <Button
+                        Width="45"
+                        Margin="0,0,45,0"
+                        Content=""
+                        IsEnabled="False"
+                        Style="{DynamicResource ControlboxButtons}" />
+                    <Button
+                        Width="45"
+                        Margin="0,0,90,0"
+                        Click="MinimizeApp"
+                        Content=""
+                        Style="{DynamicResource ControlboxButtons}" />
+                </Grid>
+                <Grid Margin="0,40,0,0">
+                    <Grid
+                        x:Name="KeybindContainer"
+                        Height="30"
+                        Margin="50,10,50,0"
+                        VerticalAlignment="Top">
+                        <Label
+                            VerticalContentAlignment="Center"
+                            FontSize="14"
+                            Foreground="#FFE0E0E0">
+                            Keybind
+                        </Label>
+                        <TextBox
+                            x:Name="Keybind"
+                            Width="100"
+                            HorizontalAlignment="Right"
+                            PreviewKeyDown="kebind_PreviewKeyDown"
+                            PreviewMouseDown="kebind_PreviewMouseDown"
+                            Text="E" />
+
+
+                    </Grid>
+                    <Grid
+                       
+                        x:Name="TopmostContainer"
+                        Height="30"
+                        Margin="50,116,50,0"
+                        VerticalAlignment="Top">
+                        <Label
+                            VerticalContentAlignment="Center"
+                            Content="Topmost"
+                            FontSize="14"
+                            Foreground="#FFE0E0E0" />
+                        <CheckBox
+                            x:Name="topmost_checkbox"
+                            Margin="300,0,0,0"
+                           
+                            Click="ToggleTopmost"
+                             />
+
+                    </Grid>
+                    <Grid
+                        x:Name="CpsContainer"
+                        Height="54"
+                        Margin="50,51,50,0"
+                        VerticalAlignment="Top">
+                        <Grid>
+                            <Label
+                                VerticalAlignment="Top"
+                                VerticalContentAlignment="Center"
+                                FontSize="14"
+                                Foreground="#FFE0E0E0" Content="Clicks per second"/>
+                            <Slider
+                                x:Name="ValueSlider"
+                                Width="100"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Top"
+                                Maximum="30"
+                                Minimum="1"
+                                Value="1" />
+
+
+                            <Label
+                                x:Name="SelectedValue"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                Foreground="#FFADADAD" Content="Current: 1"/>
+                            <Label
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Foreground="#FFADADAD" Content="30"/>
+                            <Label
+                                Margin="0,0,84,0"
+                                HorizontalAlignment="Right"
+                                VerticalAlignment="Bottom"
+                                Foreground="#FFADADAD" Content="1"/>
+
+                        </Grid>
+
+
+                    </Grid>
+                    <Grid x:Name="WatcherContainer" Margin="30,162,30,41">
+                        <Grid
+                            x:Name="WatchButtons"
+                            Height="40"
+                            Margin="20,0,20,35">
+                            <Button
+                                x:Name="StartButton"
+                                Width="325"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Background="#60CDFF"
+                                Click="StartAc"
+                                Style="{DynamicResource W11Button}" Content="Start"/>
+                        </Grid>
+                        <Grid Height="30" Margin="0,45,0,0">
+                            <Label
+                                x:Name="Status"
+                                Width="182"
+                                Height="30"
+                                HorizontalAlignment="Left"
+                                HorizontalContentAlignment="Center"
+                                Foreground="#FFBBBABA" Content="Status: Stopped"/>
+                            <Label
+                                x:Name="Indication"
+                                Width="182"
+                                Height="30"
+                                HorizontalAlignment="Right"
+                                HorizontalContentAlignment="Center"
+                                Foreground="#FFBBBABA" Content="Indication: Start AC"/>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid Height="30" VerticalAlignment="Bottom">
+                    <Label
+                        x:Name="TopmostToggle"
+                        HorizontalContentAlignment="Center"
+                        Foreground="#FF737373">
+                        Kuda LLC
+                    </Label>
+                </Grid>
+            </Grid>
+
+        </Border>
+    </Grid>
+</Window>
