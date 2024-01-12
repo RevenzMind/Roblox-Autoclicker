@@ -21,7 +21,10 @@ Roblox Autoclicker is a feature-rich autoclicker designed for Roblox, developed 
    
 ## Preview 😺
 
-https://github.com/Kuda-Development/Roblox-Autoclicker/assets/95893893/1e035e06-479e-40b7-a28e-9506b27aebb1
+
+https://github.com/RevenzMind/Roblox-Autoclicker/assets/155520951/9df451c4-bd85-4081-96e3-c10eccc62ed6
+
+
 
 ## Source Code Usage 🚀
 
